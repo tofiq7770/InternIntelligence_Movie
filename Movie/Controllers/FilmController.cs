@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Movie.DTOs;
 using Movie.Models;
+using Movie.Service;
 using Movie.Service.Interfaces;
 using System.Security.Claims;
 
@@ -11,10 +12,13 @@ namespace Movie.Controllers
     public class FilmsController : ControllerBase
     {
         private readonly IFilmService _filmService;
+        private readonly TmdbService _tmdbService;
 
-        public FilmsController(IFilmService filmService)
+        public FilmsController(IFilmService filmService, TmdbService tmdbService)
         {
             _filmService = filmService;
+
+            _tmdbService = tmdbService;
         }
 
         [HttpGet]
@@ -193,5 +197,7 @@ namespace Movie.Controllers
                 return StatusCode(500, new { Message = "An error occurred while retrieving the film details." });
             }
         }
+
+
     }
 }

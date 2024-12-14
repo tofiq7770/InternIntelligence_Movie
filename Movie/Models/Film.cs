@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Movie.Models
 {
@@ -21,6 +22,7 @@ namespace Movie.Models
         public string Overview { get; set; }
         public string AppUserId { get; set; }
 
+        [JsonIgnore]
         public AppUser AppUser { get; set; }
     }
 
