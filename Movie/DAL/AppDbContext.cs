@@ -11,5 +11,17 @@ namespace Movie.DAL
 
         }
 
+        public DbSet<Film> Films { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Film>()
+                .HasOne(f => f.AppUser)
+                .WithMany(u => u.Films)
+                .HasForeignKey(f => f.AppUserId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
     }
 }
